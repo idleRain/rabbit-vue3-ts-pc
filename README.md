@@ -69,3 +69,8 @@ eg:
             |-- index.vue
 
 ```
+
+### 贡献者
+- [YouthguyZ](https://github.com/YouthguyZ)
+
+详情见 [contributors](https://github.com/idleRain/rabbit-vue3-ts-pc/graphs/contributors)
