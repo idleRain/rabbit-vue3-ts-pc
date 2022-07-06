@@ -3,6 +3,7 @@ export interface CategoryItem {
   id: string
   name: string
   picture: string
+  open?: boolean
   children: CategoryItem[]
 }
 
