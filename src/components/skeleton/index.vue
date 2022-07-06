@@ -1,36 +1,36 @@
-<script lang="ts" setup name="XtxSkeleton">
-// TODO: 改成ts
-defineProps({
-  bg: {
-    type: String,
-    default: '#efefef',
-  },
-  width: {
-    type: Number,
-    required: true,
-  },
-  height: {
-    type: Number,
-    required: true,
-  },
-  animated: {
-    type: Boolean,
-    default: false,
-  },
-  fade: {
-    type: Boolean,
-    default: false,
-  },
+<script lang="ts" setup name="Skeleton">
+/*****************
+ defineProps({
+  bg: { type: String, default: '#efefef' },
+  width: { type: Number, required: true },
+  height: { type: Number, required: true },
+  animated: { type: Boolean, default: false },
+  fade: { type: Boolean, default: false }
+})
+*****************/
+
+interface Props {
+  bg?: string
+  width: number | string
+  height: number | string
+  animated?: boolean
+  fade?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  bg: '#efefef',
+  animated: false,
+  fade: false
 })
 </script>
 <template>
   <div
       class="xtx-skeleton"
-      :style="{ width: width + 'px', height: height + 'px' }"
-      :class="{ shan: animated, fade: fade }"
+      :style="{ width: props.width + 'px', height: props.height + 'px' }"
+      :class="{ shan: props.animated, fade: props.fade }"
   >
     <!-- 1 盒子-->
-    <div class="block" :style="{ backgroundColor: bg }"></div>
+    <div class="block" :style="{ backgroundColor: props.bg }"></div>
     <!-- 2 闪效果 xtx-skeleton 伪元素 --->
   </div>
 </template>
@@ -41,12 +41,14 @@ defineProps({
   position: relative;
   overflow: hidden;
   vertical-align: middle;
+
   .block {
     width: 100%;
     height: 100%;
     border-radius: 2px;
   }
 }
+
 .shan {
   &::after {
     content: '';
@@ -55,15 +57,14 @@ defineProps({
     top: 0;
     width: 50%;
     height: 100%;
-    background: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0) 0,
-        rgba(255, 255, 255, 0.3) 50%,
-        rgba(255, 255, 255, 0) 100%
-    );
+    background: linear-gradient(to left,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%);
     transform: skewX(-45deg);
   }
 }
+
 @keyframes shan {
   0% {
     left: -100%;
@@ -76,6 +77,7 @@ defineProps({
 .fade {
   animation: fade 1s linear infinite alternate;
 }
+
 @keyframes fade {
   from {
     opacity: 0.2;
