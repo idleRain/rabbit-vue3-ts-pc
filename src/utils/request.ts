@@ -4,7 +4,7 @@ import axios from 'axios'
 // 备用接口地址2: https://apipc-xiaotuxian-front.itheima.net
 // 备用接口地址3: http://pcapi-xiaotuxian-front.itheima.net/
 const instance = axios.create({
-  baseURL: 'https://apipc-xiaotuxian-front.itheima.net',
+  baseURL: 'http://pcapi-xiaotuxian-front.itheima.net',
   timeout: 5000
 })
 

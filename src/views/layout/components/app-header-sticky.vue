@@ -1,22 +1,14 @@
 <script lang="ts" setup name="AppHeaderSticky">
 import AppHeaderNav from './app-header-nav.vue'
-import { computed, onBeforeUnmount, ref } from 'vue'
+import { useScroll } from '@vueuse/core'
+import { computed } from 'vue'
 
-const y = ref<number>(0)
-
-const getScroll = () => {
-  y.value = window.screenTop || document.documentElement.scrollTop
-}
+const { y } = useScroll(window)
 
 const isShow = computed(() => {
   return y.value >= 80
 })
 
-window.addEventListener('scroll', getScroll)
-
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', getScroll)
-})
 </script>
 
 <template>
@@ -46,7 +38,7 @@ onBeforeUnmount(() => {
   transform: translateY(-100%);
 
   &.show {
-    transition: all 0.3s ease-out;
+    transition: all .4s ease-out;
     transform: translateY(0%);
   }
 
@@ -58,7 +50,7 @@ onBeforeUnmount(() => {
   .logo {
     width: 200px;
     height: 80px;
-    background: url(@/assets/images/logo.png) no-repeat right 2px;
+    background: url("../../../assets/images/logo.png") no-repeat right 2px;
     background-size: 160px auto;
   }
 

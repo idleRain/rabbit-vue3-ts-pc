@@ -8,10 +8,10 @@ import AppHeaderSticky from '@/views/layout/components/app-header-sticky.vue'
   <AppTopNav></AppTopNav>
   <AppHeader></AppHeader>
   <AppHeaderSticky></AppHeaderSticky>
-  <div class="app-body" style="min-height: 500px">
+  <main style="min-height: 500px">
     <!-- 路由出口 -->
     <router-view></router-view>
-  </div>
+  </main>
   <AppFooter></AppFooter>
 </template>
 

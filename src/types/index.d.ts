@@ -1,3 +1,10 @@
+// axios 请求的接口
+export interface ApiRes<T> {
+  code: string
+  msg: string
+  result: T[]
+}
+
 // 导航的每一项
 export interface CategoryItem {
   id: string
@@ -5,11 +12,15 @@ export interface CategoryItem {
   picture: string
   open?: boolean
   children: CategoryItem[]
+  goods: GoodsItem[]
 }
 
-// axios 请求的接口
-export interface ApiRes<T> {
-  code: string
-  msg: string
-  result: T[]
+export interface GoodsItem {
+	id: string;
+	name: string;
+	desc: string;
+	price: string;
+	picture: string;
+	discount?: any;
+	orderNum?: any;
 }
