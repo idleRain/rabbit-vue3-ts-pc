@@ -25,10 +25,10 @@ category.getAllCategory()
       >
         {{ item.name }}
       </router-link>
-      <div class="layer" :class="{open: item.open}">
-        <ul>
+      <div class="layer"" :class="{open: item.open}">
+        <ul v-if="item.children">
           <!-- 二级路由 -->
-          <li v-for="sub in item.children" :key="sub.id">
+          <li v-for="sub in item.children"  :key="sub.id">
             <router-link :to="'/category/sub/' + sub.id">
               <img :src="sub.picture" :alt="sub.name"/>
               <p>{{ sub.name }}</p>

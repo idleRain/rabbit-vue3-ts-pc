@@ -17,18 +17,11 @@ eg:
     |-- env.d.ts
     |-- global.d.ts
     |-- main.ts
-    |-- md.txt
     |-- assets
     |   |-- favicon.ico
     |   |-- images
     |   |   |-- 200.png
-    |   |   |-- center-bg.png
-    |   |   |-- load.gif
-    |   |   |-- loading.gif
-    |   |   |-- login-bg.png
-    |   |   |-- logo.png
-    |   |   |-- none.png
-    |   |   |-- qrcode.jpg
+    |   |   |-- ...
     |   |-- styles
     |       |-- common.less
     |       |-- mixins.less
