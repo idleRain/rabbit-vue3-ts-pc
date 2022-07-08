@@ -2,6 +2,7 @@
 import HomeBanner from './components/home-banner.vue'
 import HomeCategory from './components/home-category.vue'
 import HomeNew from '@/views/home/components/home-new.vue'
+import HomeHot from '@/views/home/components/home-hot.vue'
 </script>
 
 <template>
@@ -13,9 +14,11 @@ import HomeNew from '@/views/home/components/home-new.vue'
         <!-- banner轮播图 -->
         <HomeBanner/>
       </div>
-      <!-- 新鲜好物 -->
-      <HomeNew></HomeNew>
     </div>
+    <!-- 新鲜好物 -->
+    <HomeNew></HomeNew>
+    <!--人气推荐-->
+    <HomeHot></HomeHot>
   </div>
 </template>
 
