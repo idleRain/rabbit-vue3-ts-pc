@@ -15,7 +15,7 @@ home.getNewList()
       <ul class="goods-list">
         <li v-for="item in home.newGoodList" :key="item.id">
           <RouterLink to="/">
-            <img :src="item.picture"
+            <img v-lazy="item.picture"
                  :alt="item.name"
             />
             <p class="name ellipsis">{{ item.name }}</p>
