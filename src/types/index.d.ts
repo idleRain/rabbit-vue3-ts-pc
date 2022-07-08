@@ -24,3 +24,10 @@ export interface GoodsItem {
 	discount?: any;
 	orderNum?: any;
 }
+
+export interface BannerItem {
+	id: string;
+	imgUrl: string;
+	hrefUrl: string;
+	type: string;
+}

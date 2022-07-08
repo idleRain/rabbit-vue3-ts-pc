@@ -40,7 +40,9 @@ const mouseenter = (id: string) => {
       <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
       <ul>
         <li v-for="item in goods" :key="item.id">
-          <RouterLink :to="`/product/${item.id}`">
+          <!--<RouterLink :to="`/product/${item.id}`">-->
+          <!-- TODO: to改成 product -->
+          <RouterLink to="/">
             <img :src="item.picture" :alt="item.name">
             <div class="info">
               <p class="name ellipsis-2">{{ item.name }}</p>

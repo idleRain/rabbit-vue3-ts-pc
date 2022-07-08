@@ -25,7 +25,7 @@ category.getAllCategory()
       >
         {{ item.name }}
       </router-link>
-      <div class="layer"" :class="{open: item.open}">
+      <div class="layer" :class="{open: item.open}">
         <ul v-if="item.children">
           <!-- 二级路由 -->
           <li v-for="sub in item.children"  :key="sub.id">
