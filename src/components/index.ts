@@ -25,9 +25,15 @@ export default {
         // el: 当前指令绑定的 DOM 元素
         // console.log(el, binding)
         // 逻辑: 当 el 进入可视区后, 给它设置 src 属性
-        useIntersectionObserver(el, ([{ isIntersecting }]) => {
+        const { stop } =useIntersectionObserver(el, ([{ isIntersecting }]) => {
           if (isIntersecting) {
+            // 停止监听，防止重复发送请求
+            stop()
             el.src = binding.value
+            // 对图片加载错误时进行处理
+            el.onerror = () => {
+              el.src = defaultImg
+            }
           }
         })
       }
