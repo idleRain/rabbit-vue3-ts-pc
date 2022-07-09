@@ -1,12 +1,30 @@
 <script lang="ts" setup>
 import useStore from '@/store'
 import HomePanel from './home-panel.vue'
+// import { useIntersectionObserver } from '@vueuse/core'
+// import { ref } from 'vue'
+import { useLazyData } from '@/hooks/lazy'
+import HomeSkeleton from './home-skeleton.vue'
 const { home } = useStore()
-home.getHotList()
+// home.getHotList()
+// 数据请求的懒加载
+/***************
+let target = ref(null)
+const { stop } = useIntersectionObserver(target, ([{isIntersecting}]) => {
+  if (isIntersecting) {
+    home.getHotList()
+    stop()
+  }
+})
+ ***************/
+
+// 对数据懒加载进行优化
+const target = useLazyData(home.getHotList)
 </script>
+
 <template>
-  <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
-    <ul ref="pannel" class="goods-list">
+  <HomePanel ref="target" title="人气推荐" sub-title="人气爆款 不容错过">
+    <ul ref="pannel" class="goods-list" v-if="home.hotGoodList.length">
       <li v-for="item in home.hotGoodList" :key="item.id">
         <RouterLink to="/">
           <img v-lazy="item.picture" alt="" />
@@ -15,6 +33,7 @@ home.getHotList()
         </RouterLink>
       </li>
     </ul>
+    <HomeSkeleton v-else :count="4"></HomeSkeleton>
   </HomePanel>
 </template>
 

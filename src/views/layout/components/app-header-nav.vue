@@ -1,9 +1,9 @@
 <script lang="ts" setup name="AppHeaderNav">
 import useStore from '@/store'
-
+//
 const { category } = useStore()
-// 调用方法，发送请求
-category.getAllCategory()
+// // 调用方法，发送请求
+// category.getAllCategory()
 </script>
 
 <template>
