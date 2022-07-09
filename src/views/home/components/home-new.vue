@@ -4,13 +4,14 @@ import useStore from '@/store'
 // import { ref } from 'vue'
 // import { useIntersectionObserver } from '@vueuse/core'
 import { useLazyData } from '@/hooks/lazy'
+import HomeSkeleton from './home-skeleton.vue'
 
 const { home } = useStore()
 // home.getNewList()
 // 数据请求的懒加载
 /***************
-let target = ref(null)
-const { stop } = useIntersectionObserver(target, ([{isIntersecting}]) => {
+ let target = ref(null)
+ const { stop } = useIntersectionObserver(target, ([{isIntersecting}]) => {
   if (isIntersecting) {
     home.getNewList()
     stop()
@@ -27,7 +28,7 @@ const target = useLazyData(home.getNewList)
         <More path="/"/>
       </template>
       <!-- 面板内容 -->
-      <ul class="goods-list">
+      <ul class="goods-list" v-if="home.newGoodList.length">
         <li v-for="item in home.newGoodList" :key="item.id">
           <RouterLink to="/">
             <img v-lazy="item.picture"
@@ -38,6 +39,7 @@ const target = useLazyData(home.getNewList)
           </RouterLink>
         </li>
       </ul>
+      <HomeSkeleton :count="4" v-else></HomeSkeleton>
     </HomePanel>
   </div>
 </template>

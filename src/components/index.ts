@@ -3,6 +3,8 @@ import { App } from 'vue'
 import Skeleton from '@/components/skeleton/index.vue'
 import Carousel from '@/components/carousel/index.vue'
 import More from '@/components/more/index.vue'
+import BreadItem from './bread/item.vue'
+import Bread from './bread/index.vue'
 import { useIntersectionObserver } from '@vueuse/core'
 // 导入默认图片
 import defaultImg from '@/assets/images/200.png'
@@ -13,6 +15,8 @@ export default {
     app.component(Skeleton.name, Skeleton)
     app.component(Carousel.name, Carousel)
     app.component(More.name, More)
+    app.component(BreadItem.name, BreadItem)
+    app.component(Bread.name, Bread)
 
     // 全局注册指令
     // 参数1: 指令名
