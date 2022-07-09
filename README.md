@@ -28,8 +28,17 @@ eg:
     |       |-- variables.less
     |-- components
     |   |-- index.ts
+    |   |-- bread
+    |   |   |-- index.vue
+    |   |   |-- item.vue
+    |   |-- carousel
+    |   |   |-- index.vue
+    |   |-- more
+    |   |   |-- index.vue
     |   |-- skeleton
     |       |-- index.vue
+    |-- hooks
+    |   |-- lazy.ts
     |-- router
     |   |-- index.ts
     |-- store
@@ -37,6 +46,7 @@ eg:
     |   |-- index.ts
     |   |-- modules
     |       |-- category.ts
+    |       |-- home.ts
     |-- types
     |   |-- index.d.ts
     |-- utils
@@ -49,7 +59,14 @@ eg:
         |   |-- index.vue
         |   |-- components
         |       |-- home-banner.vue
+        |       |-- home-brand.vue
         |       |-- home-category.vue
+        |       |-- home-hot.vue
+        |       |-- home-new.vue
+        |       |-- home-panel.vue
+        |       |-- home-product.vue
+        |       |-- home-skeleton.vue
+        |       |-- home-special.vue
         |-- layout
         |   |-- inedx.vue
         |   |-- components
@@ -60,7 +77,7 @@ eg:
         |       |-- app-top-nav.vue
         |-- login
             |-- index.vue
-
+            
 ```
 
 ### 贡献者
