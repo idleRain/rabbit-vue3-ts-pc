@@ -147,6 +147,38 @@ ul {
   }
 }
 
+// 离开淡出 + 进入淡入
+.fade-in-out {
+  &-leave {
+    &-from {
+      opacity: 1;
+    }
+    &-active {
+      position: absolute;
+      width: 100%;
+      transition: opacity 0.5s 0.2s;
+      z-index: 1;
+    }
+    &-to {
+      opacity: 0;
+    }
+  }
+  &-enter {
+    &-from {
+      opacity: 0;
+    }
+    &-active {
+      position: absolute;
+      width: 100%;
+      transition: opacity 0.5s 0.2s;
+      z-index: 1;
+    }
+    &-to {
+      opacity: 1;
+    }
+  }
+}
+
 // 1. 离开，透明度  1---->0    位移 0---->30
 // 2. 进入，透明度  0---->1    位移 30---->0
 // 执行顺序，先离开再进入

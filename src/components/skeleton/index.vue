@@ -15,12 +15,14 @@ interface Props {
   height: number | string
   animated?: boolean
   fade?: boolean
+  opacity?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   bg: '#efefef',
   animated: false,
-  fade: false
+  fade: false,
+  opacity: '1'
 })
 </script>
 <template>
@@ -30,7 +32,7 @@ const props = withDefaults(defineProps<Props>(), {
       :class="{ shan: props.animated, fade: props.fade }"
   >
     <!-- 1 盒子-->
-    <div class="block" :style="{ backgroundColor: props.bg }"></div>
+    <div class="block" :style="{ backgroundColor: props.bg, opacity: props.opacity }"></div>
     <!-- 2 闪效果 xtx-skeleton 伪元素 --->
   </div>
 </template>

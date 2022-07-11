@@ -40,6 +40,9 @@ export default defineStore('category', {
         }
       )
       this.subCategory = res.data.result
+    },
+    resetSubCategory() {
+      this.subCategory = {} as SubCategory
     }
   }
 })
