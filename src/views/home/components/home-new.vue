@@ -30,7 +30,7 @@ const target = useLazyData(home.getNewList)
       <!-- 面板内容 -->
       <ul class="goods-list" v-if="home.newGoodList.length">
         <li v-for="item in home.newGoodList" :key="item.id">
-          <RouterLink to="/">
+          <RouterLink :to="`/goods/${item.id}`">
             <img v-lazy="item.picture"
                  :alt="item.name"
             />

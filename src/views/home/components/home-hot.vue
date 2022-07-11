@@ -26,7 +26,7 @@ const target = useLazyData(home.getHotList)
   <HomePanel ref="target" title="人气推荐" sub-title="人气爆款 不容错过">
     <ul ref="pannel" class="goods-list" v-if="home.hotGoodList.length">
       <li v-for="item in home.hotGoodList" :key="item.id">
-        <RouterLink to="/">
+        <RouterLink :to="`/goods/${item.id}`">
           <img v-lazy="item.picture" alt="" />
           <p class="name">{{ item.title }}</p>
           <p class="desc">{{ item.alt }}</p>

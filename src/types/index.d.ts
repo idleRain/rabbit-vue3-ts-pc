@@ -62,7 +62,7 @@ export interface BrandItem {
 
 
 // 首页商品推荐
-export type HomeProduct = {
+export interface HomeProduct {
 	id: string
 	name: string
 	picture: string
@@ -83,7 +83,7 @@ export type HomeProduct = {
 }
 
 // 最新专题
-export type SpecialItem = {
+export interface SpecialItem {
 	creator: string
 	isDelete: number
 	createTime: string
@@ -101,14 +101,14 @@ export type SpecialItem = {
 }
 
 // 顶级分类类型
-export type TopCategory = {
+export interface TopCategory{
 	id: string
 	name: string
 	picture: string
 	children: CategoryItem[]
 }
 
-export type SaleProperty = {
+export interface SaleProperty {
 	id: string
 	name: string
 	properties: {
@@ -117,7 +117,7 @@ export type SaleProperty = {
 	}[]
 }
 
-export type SubCategory = {
+export interface SubCategory {
 	id: string
 	name: string
 	picture?: any
@@ -134,4 +134,31 @@ export type SubCategory = {
 		place: string
 	}[]
 	saleProperties: SaleProperty[]
+	goods: GoodsItem[]
+}
+
+export interface GoodsInfo {
+	id: string
+	name: string
+	spuCode: string
+	desc: string
+	price: string
+	oldPrice: string
+	discount: number
+	inventory: number
+	salesCount: number
+	commentCount: number
+	collectCount: number
+	mainVideos: any[]
+	videoScale: number
+	mainPictures: string[]
+	isPreSale: boolean
+	isCollect?: any
+	recommends?: any
+	userAddresses?: any
+	evaluationInfo?: any
+	categories: {
+		id: string
+		name: string
+	}[]
 }

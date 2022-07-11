@@ -34,7 +34,7 @@ const target = useLazyData(home.getProductList)
         <ul class="goods-list">
           <li v-for="goods in item.goods" :key="goods.id">
             <div class="goods-item">
-              <RouterLink to="/" class="image">
+              <RouterLink :to="`/goods/${goods.id}`" class="image">
                 <img v-lazy="goods.picture" alt=""/>
               </RouterLink>
               <p class="name ellipsis-2">{{ goods.name }}</p>

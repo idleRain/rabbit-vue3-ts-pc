@@ -41,8 +41,7 @@ const mouseenter = (id: string) => {
       <ul>
         <li v-for="item in goods" :key="item.id">
           <!--<RouterLink :to="`/product/${item.id}`">-->
-          <!-- TODO: to改成 product -->
-          <RouterLink to="/">
+          <RouterLink :to="`/goods/${item.id}`">
             <img :src="item.picture" :alt="item.name">
             <div class="info">
               <p class="name ellipsis-2">{{ item.name }}</p>
