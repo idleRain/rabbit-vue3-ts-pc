@@ -44,7 +44,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="xtx-carousel" @mouseenter="stop" @mouseleave="start">
+  <div class="xtx-carousel" @mouseover="stop" @mouseleave="start">
     <ul class="carousel-body">
       <li class="carousel-item" v-for="(item,index) in slides" :key="item.id" :class="{fade: index === active}">
         <RouterLink :to="item.hrefUrl">

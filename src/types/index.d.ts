@@ -2,7 +2,7 @@
 export interface ApiRes<T> {
   code: string
   msg: string
-  result: T[]
+  result: T
 }
 
 // 导航的每一项
@@ -106,4 +106,32 @@ export type TopCategory = {
 	name: string
 	picture: string
 	children: CategoryItem[]
+}
+
+export type SaleProperty = {
+	id: string
+	name: string
+	properties: {
+		id: string
+		name: string
+	}[]
+}
+
+export type SubCategory = {
+	id: string
+	name: string
+	picture?: any
+	parentId: string
+	parentName: string
+	brands: {
+		id: string
+		name: string
+		nameEn: string
+		logo: string
+		picture: string
+		type?: any
+		desc: string
+		place: string
+	}[]
+	saleProperties: SaleProperty[]
 }

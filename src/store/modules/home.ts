@@ -15,31 +15,31 @@ export default defineStore('home', {
   actions: {
     // 获取 Banner 列表
     async getBannerList() {
-      const { data: res } = await request.get<ApiRes<BannerItem>>('/home/banner')
+      const { data: res } = await request.get<ApiRes<BannerItem[]>>('/home/banner')
       // console.log(res)
       this.bannerList = res.result
     },
     async getNewList() {
-      const { data: res } = await request.get<ApiRes<NewItem>>('/home/new')
+      const { data: res } = await request.get<ApiRes<NewItem[]>>('/home/new')
       // console.log(res)
       this.newGoodList = res.result
     },
     async getHotList() {
-      const { data: res } = await request.get<ApiRes<HotItem>>('/home/hot')
+      const { data: res } = await request.get<ApiRes<HotItem[]>>('/home/hot')
       // console.log(res)
       this.hotGoodList = res.result
     },
     async getBrandList() {
-      const { data: res } = await request.get<ApiRes<BrandItem>>('/home/brand')
+      const { data: res } = await request.get<ApiRes<BrandItem[]>>('/home/brand')
       // console.log(res)
       this.brandList = res.result
     },
     async getProductList() {
-      const { data: res } = await request.get<ApiRes<HomeProduct>>('/home/goods')
+      const { data: res } = await request.get<ApiRes<HomeProduct[]>>('/home/goods')
       this.productList = res.result
     },
     async getSpecialList() {
-      const { data: res } = await request.get<ApiRes<SpecialItem>>('/home/special')
+      const { data: res } = await request.get<ApiRes<SpecialItem[]>>('/home/special')
       this.specialList = res.result
     },
   }
