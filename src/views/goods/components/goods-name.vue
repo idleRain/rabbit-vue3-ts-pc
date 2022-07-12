@@ -1,9 +1,23 @@
 <script lang="ts" setup name="GoodName">
+import { CityResult } from '@/components/city';
 import { GoodsInfo } from '@/types';
+import { ref } from 'vue';
 
 defineProps<{
   goods: GoodsInfo
 }>()
+
+const address = ref('')
+
+// 处理省市县修改的回调
+const handleChangeCity = (value: CityResult) => {
+  address.value =
+    value.provinceName +
+    ' ' +
+    value.cityName +
+    ' ' +
+    value.countyName
+}
 </script>
 <template>
   <p class="g-name">{{ goods.name }}</p>
@@ -19,7 +33,10 @@ defineProps<{
     </dl>
     <dl>
       <dt>配送</dt>
-      <dd><span style="margin-right: 10px">至</span><City></City></dd>
+      <dd>
+        <span style="margin-right: 10px">至</span>
+        <City :address="address" @changeCity="handleChangeCity"></City>
+      </dd>
     </dl>
     <dl>
       <dt>服务</dt>

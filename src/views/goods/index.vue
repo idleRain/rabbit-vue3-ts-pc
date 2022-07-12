@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia'
 import GoodsImage from './components/goods-image.vue'
 import GoodsSales from './components/goods-sales.vue'
 import GoodsName from './components/goods-name.vue';
+import GoodsSku from './components/goods-sku.vue';
 
 const { goods } = useStore()
 const route = useRoute()
@@ -27,11 +28,11 @@ const { info } = storeToRefs(goods)
           <Bread v-if="goods.info.categories">
             <BreadItem to="/">首页</BreadItem>
             <BreadItem :to="`/category/${ goods.info.categories[1].id }`">{{
-                goods.info.categories[1].name
+              goods.info.categories[1].name
               }}
             </BreadItem>
             <BreadItem :to="`/category/sub/${ goods.info.categories[0].id }`">{{
-                goods.info.categories[0].name
+              goods.info.categories[0].name
               }}
             </BreadItem>
             <BreadItem>{{ goods.info.name }}</BreadItem>
@@ -40,13 +41,13 @@ const { info } = storeToRefs(goods)
           <Bread v-else>
             <BreadItem to="/">首页</BreadItem>
             <BreadItem>
-              <Skeleton opacity="0.2" bg="#27bb9a" animated :width="28" :height="18"/>
+              <Skeleton opacity="0.2" bg="#27bb9a" animated :width="28" :height="18" />
             </BreadItem>
             <BreadItem>
-              <Skeleton opacity="0.2" bg="#27bb9a" animated :width="76" :height="18"/>
+              <Skeleton opacity="0.2" bg="#27bb9a" animated :width="76" :height="18" />
             </BreadItem>
             <BreadItem>
-              <Skeleton opacity="0.2" bg="#27bb9a" animated :width="156" :height="18"/>
+              <Skeleton opacity="0.2" bg="#27bb9a" animated :width="156" :height="18" />
             </BreadItem>
           </Bread>
         </transition>
@@ -59,6 +60,7 @@ const { info } = storeToRefs(goods)
         </div>
         <div class="spec">
           <GoodsName :goods="info"></GoodsName>
+          <GoodsSku :goods="info"></GoodsSku>
         </div>
       </div>
       <!-- 商品详情 -->

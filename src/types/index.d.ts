@@ -1,18 +1,18 @@
 // axios 请求的接口
 export interface ApiRes<T> {
-  code: string
-  msg: string
-  result: T
+	code: string
+	msg: string
+	result: T
 }
 
 // 导航的每一项
 export interface CategoryItem {
-  id: string
-  name: string
-  picture: string
-  open?: boolean
-  children: CategoryItem[]
-  goods: GoodsItem[]
+	id: string
+	name: string
+	picture: string
+	open?: boolean
+	children: CategoryItem[]
+	goods: GoodsItem[]
 }
 
 export interface GoodsItem {
@@ -101,7 +101,7 @@ export interface SpecialItem {
 }
 
 // 顶级分类类型
-export interface TopCategory{
+export interface TopCategory {
 	id: string
 	name: string
 	picture: string
@@ -163,10 +163,55 @@ export interface GoodsInfo {
 	}[]
 }
 
-// 城市列表类型
-export interface AreaList {
-	code: string
-	level: number
+// 商品的规格类型
+export interface Spec {
 	name: string
-	areaList: AreaList[]
-  }
+	values: SpecValue[]
+}
+// 商品规格的值
+export interface SpecValue {
+	desc: string
+	name: string
+	picture: string
+	selected: boolean
+}
+// 商品模块的类型声明
+export interface GoodsInfo {
+	id: string
+	name: string
+	spuCode: string
+	desc: string
+	price: string
+	oldPrice: string
+	discount: number
+	inventory: number
+	salesCount: number
+	commentCount: number
+	collectCount: number
+	mainVideos: any[]
+	videoScale: number
+	mainPictures: string[]
+	isPreSale: boolean
+	isCollect?: any
+	recommends?: any
+	userAddresses?: any
+	evaluationInfo?: any
+	categories: {
+		id: string
+		name: string
+	}[]
+	specs: Spec[]
+	skus: Sku[]
+}
+// sku的类型
+export interface Sku {
+	id: string
+	inventory: number
+	oldPrice: string
+	price: string
+	skuCode: string
+	specs: {
+		name: string
+		valueName: string
+	}[]
+}
