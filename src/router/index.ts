@@ -5,11 +5,7 @@ import Home from '@/views/home/index.vue'
 const router = createRouter({
   history: createWebHistory(),
   // 让路由跳转时页面滚动到顶部
-  scrollBehavior: () => {
-    return {
-      top: 0,
-    }
-  },
+  scrollBehavior: () => ({ top: 0 }),
   routes: [
     {
       path: '/',

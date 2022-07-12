@@ -30,7 +30,7 @@ const mouseenter = (id: string) => {
           </RouterLink>
         </template>
         <template v-else>
-          <Skeleton width="80" :height="18" style="margin-right: 5px" bg="rgba(255,255,255,0.2)" animated/>
+          <Skeleton :width="80" :height="18" style="margin-right: 5px" bg="rgba(255,255,255,0.2)" animated/>
           <Skeleton :width="50" :height="18" bg="rgba(187, 255, 170, .5)" animated/>
         </template>
       </li>

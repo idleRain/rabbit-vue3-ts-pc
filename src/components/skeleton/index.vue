@@ -35,7 +35,6 @@ const props = withDefaults(defineProps<Props>(), {
     <div class="block" :style="{ backgroundColor: props.bg, opacity: props.opacity }"></div>
     <!-- 2 闪效果 xtx-skeleton 伪元素 --->
   </div>
-  <transition-group></transition-group>
 </template>
 
 <style scoped lang="less">
