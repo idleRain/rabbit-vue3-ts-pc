@@ -162,3 +162,11 @@ export interface GoodsInfo {
 		name: string
 	}[]
 }
+
+// 城市列表类型
+export interface AreaList {
+	code: string
+	level: number
+	name: string
+	areaList: AreaList[]
+  }

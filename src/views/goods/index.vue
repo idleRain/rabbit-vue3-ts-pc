@@ -4,11 +4,16 @@ import { watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia'
 import GoodsImage from './components/goods-image.vue'
+import GoodsSales from './components/goods-sales.vue'
+import GoodsName from './components/goods-name.vue';
 
 const { goods } = useStore()
 const route = useRoute()
 watchEffect(() => {
   if (route.fullPath !== '/goods/' + route.params.id) return
+  // 先清空数据
+  goods.resetGoodsInfo()
+  // 再发送请求
   goods.getGoodsInfo(route.params.id as string)
 })
 const { info } = storeToRefs(goods)
@@ -50,8 +55,11 @@ const { info } = storeToRefs(goods)
       <div class="goods-info">
         <div class="media">
           <GoodsImage :images="info.mainPictures" v-if="info.mainPictures"></GoodsImage>
+          <GoodsSales></GoodsSales>
         </div>
-        <div class="spec"></div>
+        <div class="spec">
+          <GoodsName :goods="info"></GoodsName>
+        </div>
       </div>
       <!-- 商品详情 -->
       <div class="goods-footer">
