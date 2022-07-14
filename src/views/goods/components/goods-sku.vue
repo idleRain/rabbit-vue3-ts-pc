@@ -7,6 +7,10 @@ const props = defineProps<{
   skuId?: string
 }>()
 
+const emit = defineEmits<{
+  (e: 'changeSku', skuId: string): void
+}>()
+
 const SEPARATOR = '★'
 
 const changeSelected = (item: Spec, sub: SpecValue) => {
@@ -19,6 +23,15 @@ const changeSelected = (item: Spec, sub: SpecValue) => {
   // 更新组合规格的禁用状态
   // 该调用必须在排他结束后执行
   updateDisabledStatus()
+
+  // 获取当前选中的规格
+  // 判断是否选中了所有规格, 如果选中了就子传父将 skuId 传递过去
+  const result = getSelectedSpec()
+  // 当全部选中, 将 skuId 传递给父组件
+  if (result.every(i => i)) {
+    const val = pathMap[result.join(SEPARATOR)]
+    emit('changeSku', val[0])
+  }
 }
 
 // 目标: 生成路径字典(对象/映射)
@@ -95,9 +108,11 @@ function getSelectedSpec() {
 
 // 初始化勾选状态
 function initSpecSelected() {
+  // 如果没传 skuId 则返回
   if (!props.skuId) return
   // 通过 skuId 去找到当前 sku 勾选的规格
   const result = props.goods.skus.find(item => item.id === props.skuId)
+  // 如果传的 skuId 是错的，则返回
   if (!result) return
   // console.log('通过 ID 找到的 sku:', result.specs)
   const selectArr = result.specs.map(item => item.valueName)
@@ -105,7 +120,7 @@ function initSpecSelected() {
   // 遍历所有的规格, 处理选中状态
   props.goods.specs.forEach(item => item.values.forEach(sub => sub.selected = selectArr.includes(sub.name)))
 }
-// 获取路径字典
+// 1. 获取路径字典
 const pathMap = getPathMap()
 console.log('@pathMap', pathMap)
 // 2. 初始化勾选状态

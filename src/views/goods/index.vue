@@ -18,6 +18,17 @@ watchEffect(() => {
   goods.getGoodsInfo(route.params.id as string)
 })
 const { info } = storeToRefs(goods)
+
+// 子组件选中商品后接收传过来的 skuId
+const handleChangeSku = (skuId: string) => {
+  // console.log(skuId)
+  // 根据 skuId 找到 sku 对象
+  const sku = info.value.skus.find(item => item.id === skuId)
+  // console.log(sku)
+  if (!sku) return
+  // 修改商品价格
+  goods.updateGoodsPrice(sku.price, sku.oldPrice)
+}
 </script>
 <template>
   <div class="-goods-page">
@@ -60,7 +71,7 @@ const { info } = storeToRefs(goods)
         </div>
         <div class="spec">
           <GoodsName :goods="info"></GoodsName>
-          <GoodsSku v-if="info.id" sku-id="1369155864430120962" :goods="info"></GoodsSku>
+          <GoodsSku v-if="info.id" @changeSku="handleChangeSku" sku-id="1369155864430120962" :goods="info"></GoodsSku>
         </div>
       </div>
       <!-- 商品详情 -->

@@ -15,6 +15,10 @@ export default defineStore('goods', {
     },
     resetGoodsInfo() {
       this.info = {} as GoodsInfo
+    },
+    updateGoodsPrice(price: string, oldPrice: string) {
+      this.info.price = price
+      this.info.oldPrice = oldPrice
     }
   }
 })
