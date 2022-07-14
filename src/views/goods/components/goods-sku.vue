@@ -4,24 +4,30 @@ import bwPowerSet from '@/utils/power-set'
 
 const props = defineProps<{
   goods: GoodsInfo
+  skuId?: string
 }>()
 
+const SEPARATOR = '★'
+
 const changeSelected = (item: Spec, sub: SpecValue) => {
-  // 先让所有的都不选中
-  item.values.forEach(v => v.selected = false)
+  if (sub.disabled) return
+  // 先让所有的都不选中(除了自己)
+  item.values.filter(v => sub.name !== v.name).forEach(v => v.selected = false)
   // 在处理自己
   sub.selected = !sub.selected
+  // 调用 updateDisabledStatus
+  // 更新组合规格的禁用状态
+  // 该调用必须在排他结束后执行
+  updateDisabledStatus()
 }
 
-// 目标: 生成路径字典(对象/映射) => 传入一个 庆友黄+中国 => 有货
+// 目标: 生成路径字典(对象/映射)
 // obj['中国+10cm']
 // obj['中国', '10cm'] 无法取值, 需要拼接
 function getPathMap() {
-  // console.log('@@@',props.goods.skus);
-  
+  // console.log('@@@',props.goods.skus)
   // 1. 筛选无效的数据 (没有库存的)
   const skus = props.goods.skus.filter(item => item.inventory > 0)
-  // console.log(skus)
   // 创建一个路径字典
   const pathMap: any = {}
   skus.forEach(item => {
@@ -35,8 +41,8 @@ function getPathMap() {
     // console.log(result)
     // 4. 往路径字典对象中添加属性
     result.forEach(arrItem => {
-      // console.log(arrItem.join('★'))
-      const key = arrItem.join('★')
+      // console.log(arrItem.join(SEPARATOR))
+      const key = arrItem.join(SEPARATOR)
       // pathMap[key] = true
       // 'xxx' in 对象 作用是判断 'xxx' 是否是对象的属性, 有就返回 true, 没有就是 false
       if (key in pathMap) {
@@ -53,8 +59,59 @@ function getPathMap() {
   return pathMap
 }
 
+// 更新按钮的禁用状态
+function updateDisabledStatus() {
+  // 先获取所有选中商品规格
+  const selectedArr = getSelectedSpec()
+  // console.log(selectedArr)
+  props.goods.specs.forEach((item, index) => {
+    item.values.forEach(sub => {
+      // sub.disabled = !(sub.name in pathMap)
+      // 先获取所有选中商品规格
+      // 返回的数据是: ['黑色', '', '']
+      const selectedArr = getSelectedSpec()
+      selectedArr[index] = sub.name
+      // console.log(selectedArr, sub.name, index)
+      // console.log(selectedArr.filter(v => v).join(SEPARATOR))
+      const key = selectedArr.filter(v => v).join(SEPARATOR)
+      // sub.disabled = !(sub.name in pathMap)
+      sub.disabled = !(key in pathMap)
+    })
+  })
+}
+
+// 获取被选中的规格
+function getSelectedSpec() {
+  // 希望获取每个规格被选中的值: ['', '', '']
+  const arr: string[] = []
+  // 遍历所有的规格, 获取它们的选中状态 (selected)
+  props.goods.specs.forEach(item => {
+    const result = item.values.find(v => v.selected)
+    // console.log(result?.name)
+    arr.push(result?.name || '')
+  })
+  return arr
+}
+
+// 初始化勾选状态
+function initSpecSelected() {
+  if (!props.skuId) return
+  // 通过 skuId 去找到当前 sku 勾选的规格
+  const result = props.goods.skus.find(item => item.id === props.skuId)
+  if (!result) return
+  // console.log('通过 ID 找到的 sku:', result.specs)
+  const selectArr = result.specs.map(item => item.valueName)
+  // console.log(selectArr)
+  // 遍历所有的规格, 处理选中状态
+  props.goods.specs.forEach(item => item.values.forEach(sub => sub.selected = selectArr.includes(sub.name)))
+}
+// 获取路径字典
 const pathMap = getPathMap()
-console.log('###',pathMap)
+console.log('@pathMap', pathMap)
+// 2. 初始化勾选状态
+initSpecSelected()
+// 3. 更新单个规格的禁用状态
+updateDisabledStatus()
 
 </script>
 <template>
@@ -63,9 +120,17 @@ console.log('###',pathMap)
       <dt>{{ item.name }}</dt>
       <dd>
         <template v-for="sub in item.values" :key="sub.name">
-          <img v-if="sub.picture" :src="sub.picture" :alt="sub.name" :title="sub.name"
-            @click="changeSelected(item, sub)" :class="{ selected: sub.selected }" />
-          <span v-else @click="changeSelected(item, sub)" :class="{ selected: sub.selected }">{{ sub.name }}</span>
+          <img v-if="sub.picture"
+               :src="sub.picture"
+               :alt="sub.name"
+               :title="sub.name"
+               @click="changeSelected(item, sub)"
+               :class="{ selected: sub.selected, disabled: sub.disabled }"/>
+          <span v-else
+                @click="changeSelected(item, sub)"
+                :class="{ selected: sub.selected, disabled: sub.disabled }">
+            {{ sub.name }}
+          </span>
         </template>
       </dd>
     </dl>
@@ -107,14 +172,14 @@ console.log('###',pathMap)
       flex: 1;
       color: #666;
 
-      >img {
+      > img {
         width: 50px;
         height: 50px;
         margin-top: 5px;
         .sku-state-mixin ();
       }
 
-      >span {
+      > span {
         display: inline-block;
         height: 30px;
         line-height: 30px;

@@ -174,6 +174,7 @@ export interface SpecValue {
 	name: string
 	picture: string
 	selected: boolean
+	disabled: boolean
 }
 // 商品模块的类型声明
 export interface GoodsInfo {

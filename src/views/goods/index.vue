@@ -1,12 +1,12 @@
 <script lang="ts" setup name="Goods">
-import useStore from '@/store';
-import { watchEffect } from 'vue';
-import { useRoute } from 'vue-router';
+import useStore from '@/store'
+import { watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import GoodsImage from './components/goods-image.vue'
 import GoodsSales from './components/goods-sales.vue'
-import GoodsName from './components/goods-name.vue';
-import GoodsSku from './components/goods-sku.vue';
+import GoodsName from './components/goods-name.vue'
+import GoodsSku from './components/goods-sku.vue'
 
 const { goods } = useStore()
 const route = useRoute()
@@ -28,12 +28,12 @@ const { info } = storeToRefs(goods)
           <Bread v-if="goods.info.categories">
             <BreadItem to="/">首页</BreadItem>
             <BreadItem :to="`/category/${ goods.info.categories[1].id }`">{{
-              goods.info.categories[1].name
-              }}
+            goods.info.categories[1].name
+            }}
             </BreadItem>
             <BreadItem :to="`/category/sub/${ goods.info.categories[0].id }`">{{
-              goods.info.categories[0].name
-              }}
+            goods.info.categories[0].name
+            }}
             </BreadItem>
             <BreadItem>{{ goods.info.name }}</BreadItem>
           </Bread>
@@ -60,7 +60,7 @@ const { info } = storeToRefs(goods)
         </div>
         <div class="spec">
           <GoodsName :goods="info"></GoodsName>
-          <GoodsSku :goods="info"></GoodsSku>
+          <GoodsSku v-if="info.id" sku-id="1369155864430120962" :goods="info"></GoodsSku>
         </div>
       </div>
       <!-- 商品详情 -->

@@ -13,9 +13,9 @@ import HomeSpecial from '@/views/home/components/home-special.vue'
     <div class="home-entry">
       <div class="container">
         <!-- 左侧分类 -->
-        <HomeCategory/>
+        <HomeCategory />
         <!-- banner轮播图 -->
-        <HomeBanner/>
+        <HomeBanner />
       </div>
       <!-- 新鲜好物 -->
       <HomeNew></HomeNew>
