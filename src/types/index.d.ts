@@ -137,32 +137,6 @@ export interface SubCategory {
 	goods: GoodsItem[]
 }
 
-export interface GoodsInfo {
-	id: string
-	name: string
-	spuCode: string
-	desc: string
-	price: string
-	oldPrice: string
-	discount: number
-	inventory: number
-	salesCount: number
-	commentCount: number
-	collectCount: number
-	mainVideos: any[]
-	videoScale: number
-	mainPictures: string[]
-	isPreSale: boolean
-	isCollect?: any
-	recommends?: any
-	userAddresses?: any
-	evaluationInfo?: any
-	categories: {
-		id: string
-		name: string
-	}[]
-}
-
 // 商品的规格类型
 export interface Spec {
 	name: string
@@ -203,6 +177,7 @@ export interface GoodsInfo {
 	}[]
 	specs: Spec[]
 	skus: Sku[]
+	details: GoodsDetail
 }
 // sku的类型
 export interface Sku {
@@ -215,4 +190,12 @@ export interface Sku {
 		name: string
 		valueName: string
 	}[]
+}
+
+export interface GoodsDetail {
+  pictures: string[]
+  properties: {
+    name: string
+    value: string
+  }[]
 }

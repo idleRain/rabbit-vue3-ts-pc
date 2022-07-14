@@ -4,6 +4,7 @@ import More from '@/components/more/index.vue'
 import BreadItem from '@/components/more/index.vue'
 import Bread from '@/components/more/index.vue'
 import City from '@/components/city/index.vue'
+import NumberBox from '@/components/number-box/index.vue'
 // 参考1: https://stackoverflow.com/questions/69010567/how-to-make-vscode-recognize-global-component-in-vue
 // 参考2: https://github.com/element-plus/element-plus/blob/dev/global.d.ts
 
@@ -17,6 +18,8 @@ declare module 'vue' {
     BreadItem: typeof BreadItem
     Bread: typeof Bread
     City: typeof City
+    NumberBox: typeof NumberBox
+    Btn: typeof Btn
   }
 }
 export {}

@@ -122,7 +122,7 @@ function initSpecSelected() {
 }
 // 1. 获取路径字典
 const pathMap = getPathMap()
-console.log('@pathMap', pathMap)
+// console.log('@pathMap', pathMap)
 // 2. 初始化勾选状态
 initSpecSelected()
 // 3. 更新单个规格的禁用状态

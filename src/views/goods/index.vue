@@ -1,12 +1,14 @@
 <script lang="ts" setup name="Goods">
 import useStore from '@/store'
-import { watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import GoodsImage from './components/goods-image.vue'
 import GoodsSales from './components/goods-sales.vue'
 import GoodsName from './components/goods-name.vue'
 import GoodsSku from './components/goods-sku.vue'
+import GoodsDetail from '@/views/goods/components/goods-detail.vue'
+import GoodsHot from '@/views/goods/components/goods-hot.vue'
 
 const { goods } = useStore()
 const route = useRoute()
@@ -29,6 +31,8 @@ const handleChangeSku = (skuId: string) => {
   // 修改商品价格
   goods.updateGoodsPrice(sku.price, sku.oldPrice)
 }
+
+const count = ref(5)
 </script>
 <template>
   <div class="-goods-page">
@@ -72,16 +76,26 @@ const handleChangeSku = (skuId: string) => {
         <div class="spec">
           <GoodsName :goods="info"></GoodsName>
           <GoodsSku v-if="info.id" @changeSku="handleChangeSku" sku-id="1369155864430120962" :goods="info"></GoodsSku>
+          <!-- 数字选择框 -->
+          <NumberBox v-model="count"></NumberBox>
+          <Btn type="primary" style="margin-top: 20px;">加入购物车</Btn>
         </div>
       </div>
       <!-- 商品详情 -->
-      <div class="goods-footer">
+      <div class="goods-footer" v-if="info.details">
         <div class="goods-article">
           <!-- 商品+评价 -->
-          <div class="goods-tabs"></div>
+          <div class="goods-tabs">
+            <!-- 商品详情 -->
+            <GoodsDetail :goods="info"></GoodsDetail>
+          </div>
         </div>
         <!-- 24热榜+专题推荐 -->
-        <div class="goods-aside"></div>
+        <div class="goods-aside">
+          <GoodsHot :type="1"></GoodsHot>
+          <GoodsHot :type="2"></GoodsHot>
+          <GoodsHot :type="3"></GoodsHot>
+        </div>
       </div>
     </div>
   </div>

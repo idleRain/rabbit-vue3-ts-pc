@@ -6,6 +6,8 @@ import More from '@/components/more/index.vue'
 import BreadItem from './bread/item.vue'
 import Bread from './bread/index.vue'
 import City from './city/index.vue'
+import NumberBox from './number-box/index.vue'
+import Btn from './btn/index.vue'
 import { useIntersectionObserver } from '@vueuse/core'
 // 导入默认图片
 import defaultImg from '@/assets/images/200.png'
@@ -19,6 +21,8 @@ export default {
     app.component(BreadItem.name, BreadItem)
     app.component(Bread.name, Bread)
     app.component(City.name, City)
+    app.component(NumberBox.name, NumberBox)
+    app.component(Btn.name, Btn)
 
     // 全局注册指令
     // 参数1: 指令名
