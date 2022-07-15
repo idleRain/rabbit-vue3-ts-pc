@@ -20,13 +20,14 @@ const sum = () => {
   emit('update:modelValue', props.modelValue - 1)
 }
 </script>
+
 <template>
   <div class="xtx-numbox">
     <div class="label">数量</div>
     <div class="numbox">
-      <a href="javascript: void 0;" @click="sum">-</a>
-      <input type="text" readonly :value="modelValue" />
-      <a href="javascript: void 0;" @click="add">+</a>
+      <a href="javascript: void 0;" @click="sum" :class="{ disabled: modelValue <= min }">-</a>
+      <input type="text" readonly :value="modelValue"/>
+      <a href="javascript: void 0;" @click="add" :class="{ disabled: modelValue >= max }">+</a>
     </div>
   </div>
 </template>
@@ -35,16 +36,19 @@ const sum = () => {
 .xtx-numbox {
   display: flex;
   align-items: center;
+
   .label {
     width: 60px;
     color: #999;
     padding-left: 10px;
   }
+
   .numbox {
     width: 120px;
     height: 30px;
     border: 1px solid #e4e4e4;
     display: flex;
+
     > a {
       width: 29px;
       line-height: 28px;
@@ -52,13 +56,21 @@ const sum = () => {
       background: #f8f8f8;
       font-size: 16px;
       color: #666;
+
       &:first-of-type {
         border-right: 1px solid #e4e4e4;
       }
+
       &:last-of-type {
         border-left: 1px solid #e4e4e4;
       }
+
+      &.disabled {
+        background: #ddd;
+        cursor: not-allowed;
+      }
     }
+
     > input {
       width: 60px;
       padding: 0 5px;
