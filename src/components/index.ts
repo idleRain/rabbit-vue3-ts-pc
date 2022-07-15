@@ -1,5 +1,6 @@
 // 统一的注册所有的全局组件
 import { App } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
 import Skeleton from '@/components/skeleton/index.vue'
 import Carousel from '@/components/carousel/index.vue'
 import More from '@/components/more/index.vue'
@@ -8,7 +9,8 @@ import Bread from './bread/index.vue'
 import City from './city/index.vue'
 import NumberBox from './number-box/index.vue'
 import Btn from './btn/index.vue'
-import { useIntersectionObserver } from '@vueuse/core'
+import Checkbox from './checkbox/index.vue'
+import Message from './message/message.vue'
 // 导入默认图片
 import defaultImg from '@/assets/images/200.png'
 
@@ -23,6 +25,8 @@ export default {
     app.component(City.name, City)
     app.component(NumberBox.name, NumberBox)
     app.component(Btn.name, Btn)
+    app.component(Checkbox.name, Checkbox)
+    app.component(Message.name, Message)
 
     // 全局注册指令
     // 参数1: 指令名

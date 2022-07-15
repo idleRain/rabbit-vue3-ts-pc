@@ -12,23 +12,22 @@ const active = ref<'account' | 'qrcode'>('account')
   <section class="login-section">
     <div class="wrapper">
       <nav>
-        <a href="javascript: void 0;"
-           :class="{ active: active === 'account' }"
-           @click="active = 'account'"
-        >账户登录</a>
-        <a href="javascript: void 0;"
-           :class="{ active: active === 'qrcode' }"
-           @click="active = 'qrcode'"
-        >扫码登录</a>
+        <a @click="active = 'account'" :class="{ active: active === 'account' }" href="javascript:;">账户登录</a>
+        <a @click="active = 'qrcode'" :class="{ active: active === 'qrcode' }" href="javascript:;">扫码登录</a>
       </nav>
 
       <!-- 表单 -->
-      <div v-if="active === 'account'" class="account-box">表单</div>
+      <div v-if="active === 'account'" class="account-box">
+        <LoginForm />
+      </div>
       <!-- 二维码 -->
-      <LoginForm></LoginForm>
+      <div v-else class="qrcode-box">
+        <img src="@/assets/images/qrcode.jpg" alt="" />
+        <p>打开 <a href="javascript:;">小兔鲜App</a> 扫码登录</p>
+      </div>
     </div>
   </section>
-  <LoginFooter/>
+  <LoginFooter />
 </template>
 
 <style scoped lang="less">
