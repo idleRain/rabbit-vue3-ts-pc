@@ -596,6 +596,13 @@ typescript@^4.5.4:
   resolved "https://registry.npmmirror.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
   integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
+vee-validate@^4.6.1:
+  version "4.6.1"
+  resolved "https://registry.npmmirror.com/vee-validate/-/vee-validate-4.6.1.tgz#c86192ef96da528f3a5423de2d960fe744f0b5bf"
+  integrity sha512-8IVy8PHpezerEEsvSBArFXmAN/hymeYzCA8RdDsMiX+NmYtKnkLlgtHS86j6RZ/wGQRKoStNjBOZG07ZVNr53Q==
+  dependencies:
+    "@vue/devtools-api" "^6.1.4"
+
 vite-plugin-vue-setup-extend@^0.4.0:
   version "0.4.0"
   resolved "https://registry.npmmirror.com/vite-plugin-vue-setup-extend/-/vite-plugin-vue-setup-extend-0.4.0.tgz#ebbbe265320039b8c6a3b9fcae3b8d152ecf4a13"
