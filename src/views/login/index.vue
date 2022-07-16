@@ -3,7 +3,7 @@ import LoginHeader from './components/login-header.vue'
 import LoginFooter from './components/login-footer.vue'
 import LoginForm from './components/login-form.vue'
 import { ref } from 'vue'
-
+// 选中状态：张浩 | 扫码
 const active = ref<'account' | 'qrcode'>('account')
 </script>
 

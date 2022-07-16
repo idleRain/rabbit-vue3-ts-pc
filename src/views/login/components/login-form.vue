@@ -70,16 +70,16 @@ const { validate, resetForm } = useForm({
       if (!value) return '请同意隐私条款'
       return true
     },
-    mobile: (value: string) => {
-      if (!value) return '请输入手机号'
-      if (!/^1[3-9]\d{9}$/.test(value)) return '手机号格式错误'
-      return true
-    },
-    code: (value: string) => {
-      if (!value) return '请输入验证码'
-      if (!/^\d{6}$/.test(value)) return '验证码格式错误'
-      return true
-    }
+    // mobile: (value: string) => {
+    //   if (!value) return '请输入手机号'
+    //   if (!/^1[3-9]\d{9}$/.test(value)) return '手机号格式错误'
+    //   return true
+    // },
+    // code: (value: string) => {
+    //   if (!value) return '请输入验证码'
+    //   if (!/^\d{6}$/.test(value)) return '验证码格式错误'
+    //   return true
+    // }
   }
 })
 
