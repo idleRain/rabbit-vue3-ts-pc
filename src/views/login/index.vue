@@ -3,7 +3,7 @@ import LoginHeader from './components/login-header.vue'
 import LoginFooter from './components/login-footer.vue'
 import LoginForm from './components/login-form.vue'
 import { ref } from 'vue'
-// 选中状态：张浩 | 扫码
+// 选中状态：账号 | 扫码
 const active = ref<'account' | 'qrcode'>('account')
 </script>
 
@@ -12,22 +12,22 @@ const active = ref<'account' | 'qrcode'>('account')
   <section class="login-section">
     <div class="wrapper">
       <nav>
-        <a @click="active = 'account'" :class="{ active: active === 'account' }" href="javascript:;">账户登录</a>
-        <a @click="active = 'qrcode'" :class="{ active: active === 'qrcode' }" href="javascript:;">扫码登录</a>
+        <a @click="active = 'account'" :class="{ active: active === 'account' }" href="javascript: void 0;">账户登录</a>
+        <a @click="active = 'qrcode'" :class="{ active: active === 'qrcode' }" href="javascript: void 0;">扫码登录</a>
       </nav>
 
       <!-- 表单 -->
       <div v-if="active === 'account'" class="account-box">
-        <LoginForm />
+        <LoginForm/>
       </div>
       <!-- 二维码 -->
       <div v-else class="qrcode-box">
-        <img src="@/assets/images/qrcode.jpg" alt="" />
-        <p>打开 <a href="javascript:;">小兔鲜App</a> 扫码登录</p>
+        <img src="@/assets/images/qrcode.jpg" alt=""/>
+        <p>打开 <a href="javascript: void 0;">小兔鲜App</a> 扫码登录</p>
       </div>
     </div>
   </section>
-  <LoginFooter />
+  <LoginFooter/>
 </template>
 
 <style scoped lang="less">
