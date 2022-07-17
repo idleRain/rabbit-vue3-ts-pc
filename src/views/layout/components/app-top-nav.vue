@@ -1,15 +1,32 @@
-<script lang="ts" setup name="AppTopNav"></script>
+<script lang="ts" setup name="AppTopNav">
+import useStore from '@/store'
+import { useRouter } from 'vue-router'
+
+const { user } = useStore()
+const router = useRouter()
+const logout = () => {
+  console.log(123)
+  user.logout()
+  router.replace('/login')
+}
+</script>
 
 <template>
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <li>
-          <a href="javascript:;"><i class="iconfont icon-user"></i>周杰伦</a>
-        </li>
-        <li><a href="javascript:;">退出登录</a></li>
-        <li><router-link to="/login">请先登录</router-link></li>
-        <li><a href="javascript:;">免费注册</a></li>
+        <template v-if="user.profile.token">
+          <li>
+            <a href="javascript:;"><i class="iconfont icon-user"></i>{{ user.profile.nickname || user.profile.account }}</a>
+          </li>
+          <li><a href="javascript:;" @click="logout">退出登录</a></li>
+        </template>
+        <template v-else>
+          <li>
+            <router-link to="/login">请先登录</router-link>
+          </li>
+          <li><a href="javascript:;">免费注册</a></li>
+        </template>
         <li><a href="javascript:;">我的订单</a></li>
         <li><a href="javascript:;">会员中心</a></li>
         <li><a href="javascript:;">帮助中心</a></li>

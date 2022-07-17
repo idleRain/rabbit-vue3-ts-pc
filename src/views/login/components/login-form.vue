@@ -4,6 +4,8 @@ import { Message } from '@/components/message'
 import useStore from '@/store'
 import { useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
+import { useIntervalFn } from '@vueuse/core'
+import { useCountDown } from '@/hooks/count-down'
 
 const { user } = useStore()
 const router = useRouter()
@@ -34,21 +36,44 @@ const login = async () => {
   }
    ************/
 
-  // 兜底校验
-  const { valid } = await validate()
+      // 兜底校验
+  const { errors } = await validate()
   // console.log(valid)
-  if (!valid) return
-  console.log('要发请求咯')
-  try {
+  // if (!valid) return
+  // console.log('要发请求咯')
+  if (type.value === 'account') {
+    if (errors.account || errors.password || errors.isAgree) return
     await user.login(account.value, password.value)
-    Message({ type: 'success', text: '登录成功' })
-    // 跳转到首页
-    await router.push('/')
-  } catch (e) {
-    console.dir(e)
-    Message.error('嘤嘤嘤 ~~ 用户名或者密码错误')
+  } else {
+    if (errors.mobile || errors.code || errors.isAgree) return
+    await user.mobileLogin(mobile.value, code.value)
   }
+  Message({ type: 'success', text: '登录成功' })
+  // 跳转到首页
+  await router.push('/')
 }
+
+const codeRef = ref<HTMLInputElement | null>(null)
+const mobileRef = ref<HTMLInputElement | null>(null)
+// 发送验证码
+const { start, time } = useCountDown(60)
+const send = async () => {
+  // 如果倒计时没结束，则不再执行
+  if (time.value > 0) return
+  // const timerId = window.setInterval(() => {
+  //   time.value--
+  //   if (time.value <= 0) window.clearInterval(timerId)
+  // }, 1000)
+  const { valid } = await validateMobile()
+  if (!valid) return mobileRef.value?.focus()
+  codeRef.value?.focus()
+  await user.sendMobileMsg(mobile.value)
+  Message.success('获取验证码成功')
+  // 开启倒计时
+  // time.value = 60
+  start()
+}
+
 // 表单校验
 const { validate, resetForm } = useForm({
   validationSchema: {
@@ -70,23 +95,23 @@ const { validate, resetForm } = useForm({
       if (!value) return '请同意隐私条款'
       return true
     },
-    // mobile: (value: string) => {
-    //   if (!value) return '请输入手机号'
-    //   if (!/^1[3-9]\d{9}$/.test(value)) return '手机号格式错误'
-    //   return true
-    // },
-    // code: (value: string) => {
-    //   if (!value) return '请输入验证码'
-    //   if (!/^\d{6}$/.test(value)) return '验证码格式错误'
-    //   return true
-    // }
+    mobile: (value: string) => {
+      if (!value) return '请输入手机号'
+      if (!/^1[3-9]\d{9}$/.test(value)) return '手机号格式错误'
+      return true
+    },
+    code: (value: string) => {
+      if (!value) return '请输入验证码'
+      if (!/^\d{6}$/.test(value)) return '验证码格式错误'
+      return true
+    }
   }
 })
 
 const { value: account, errorMessage: accountError } = useField<string>('account')
 const { value: password, errorMessage: passwordError } = useField<string>('password')
 const { value: isAgree, errorMessage: isAgreeError } = useField<boolean>('isAgree')
-const { value: mobile, errorMessage: mobileError } = useField<string>('mobile')
+const { value: mobile, errorMessage: mobileError, validate: validateMobile } = useField<string>('mobile')
 const { value: code, errorMessage: codeError } = useField<string>('code')
 
 // 监听type的变化
@@ -128,15 +153,17 @@ watch(type, () => {
         <div class="form-item">
           <div class="input">
             <i class="iconfont icon-user"></i>
-            <input type="text" v-model="mobile" placeholder="请输入手机号"/>
+            <input ref="mobileRef" type="text" v-model="mobile" placeholder="请输入手机号"/>
           </div>
           <div class="error" v-if="mobileError"><i class="iconfont icon-warning"/>{{ mobileError }}</div>
         </div>
         <div class="form-item">
           <div class="input">
             <i class="iconfont icon-code"></i>
-            <input type="password" v-model="code" placeholder="请输入验证码"/>
-            <span class="code">发送验证码</span>
+            <input ref="codeRef" type="password" v-model="code" placeholder="请输入验证码"/>
+            <span class="code" @click="send">
+              {{ time === 0 ? '发送验证码' : `${ time }秒后再发送` }}
+            </span>
           </div>
           <div class="error" v-if="codeError"><i class="iconfont icon-warning"/>{{ codeError }}</div>
         </div>
