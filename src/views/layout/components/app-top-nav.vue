@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 const { user } = useStore()
 const router = useRouter()
 const logout = () => {
-  console.log(123)
   user.logout()
   router.replace('/login')
 }
